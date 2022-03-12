@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Ei Demonstration</title>
+	
+	<link href="https://fonts.googleapis.com/css?family=Sawarabi Mincho" rel="stylesheet" />
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<script>
+		$(function () {
+			$(".chara img").hover(
+				function () {
+					$(".content").css(
+						"animation",
+						"background-darken 0.25s ease-in-out forwards"
+					);
+					$(".motto").css(
+						"animation",
+						"motto-appear 0.2s ease-in-out forwards"
+					);
+					$(".motto").css("animation-delay", "0.23s");
+				},
+				function () {
+					$(".motto").css(
+						"animation",
+						"motto-disappear 0.2s ease-in-out forwards"
+					);
+					$(".content").css(
+						"animation",
+						"background-darken-reverse 0.25s ease-in-out forwards"
+					);
+				}
+			);
+		});
+	</script>
+
+	<style>
+		body {
+			position: relative;
+			margin: 0;
+			min-width: 1024px;
+			overflow: hidden;
+			box-sizing: border-box;
+		}
+
+		.content {
+			position: relative;
+			height: 100vh;
+			overflow: hidden;
+		}
+
+		@keyframes background-darken {
+			from {
+				transform: scale(1);
+				filter: blur(0px) brightness(1);
+			}
+
+			to {
+				transform: scale(1.1);
+				filter: blur(2px) brightness(0.5);
+			}
+		}
+
+		@keyframes background-darken-reverse {
+			from {
+				transform: scale(1.1);
+				filter: blur(2px) brightness(0.5);
+			}
+
+			to {
+				transform: scale(1);
+				filter: blur(0px) brightness(1);
+			}
+		}
+
+		.content::before {
+			position: fixed;
+			top: 0;
+			content: "";
+
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			background-attachment: fixed;
+			background-image: url("raiden_background.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+
+			transform: scale(1.1);
+			filter: blur(5px);
+
+			animation: blur 1.5s ease-in-out;
+		}
+
+		@keyframes blur {
+			from {
+				transform: scale(1.1);
+				filter: blur(5px) brightness(0);
+			}
+
+			to {
+				transform: scale(1.1);
+				filter: blur(5px) brightness(1);
+			}
+		}
+
+		.chara img:last-child {
+			position: absolute;
+			bottom: 0;
+			height: 90%;
+			right: 0;
+
+			animation-duration: 1.5s;
+			animation-name: slidein;
+			animation-fill-mode: both;
+			animation-timing-function: ease-in-out;
+
+			transition: 0.2s ease-in-out;
+		}
+
+		.chara img:hover {
+			cursor: pointer;
+			transform: scale(1.15);
+			transition: 0.3s ease-in-out;
+		}
+
+		@keyframes slidein {
+			from {
+				bottom: 0;
+				right: -20vh;
+			}
+
+			to {
+				bottom: 0;
+				right: 0;
+			}
+		}
+
+		.container {
+			padding: 20px;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-end;
+			writing-mode: vertical-rl;
+			font-family: serif;
+		}
+
+		.container>.title {
+			font-weight: 900;
+			font-size: 16em;
+			/*
+                 *	Not standard, but works in latest version of Chrome, Firefox and Safari.
+                 *  https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-stroke
+				 */
+			-webkit-text-stroke: 2px rgb(255, 255, 255);
+			color: transparent;
+			text-shadow: none;
+			line-height: 0.95;
+		}
+
+		.container>.title:hover {
+			cursor: default;
+		}
+
+		.info {
+			margin-top: 20px;
+			height: 45px;
+			color: white;
+
+			align-self: stretch;
+			display: flex;
+			flex-direction: column-reverse;
+			justify-content: flex-start;
+			align-items: center;
+		}
+
+		.info>button {
+			writing-mode: horizontal-tb;
+			width: 150px;
+			height: 40px;
+			background-color: transparent;
+			border: 2px solid white;
+			border-radius: 999px;
+
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+				Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+				"Helvetica Neue", sans-serif;
+			font-size: 17px;
+			color: white;
+
+			transition: 0.15s;
+		}
+
+		.info>button:hover {
+			background-color: white;
+			color: black;
+			cursor: pointer;
+			animation: button-hover 0.2s ease-in-out;
+		}
+
+		@keyframes button-hover {
+			from {
+				background-color: transparent;
+				color: white;
+			}
+
+			to {
+				background-color: white;
+				color: black;
+			}
+		}
+
+		.info.country {
+			margin-top: 0px;
+			margin-left: auto;
+			display: flex;
+			height: 100%;
+		}
+
+		.info.country img {
+			height: 100%;
+			border-radius: 999px;
+			animation: rotate 5s linear infinite;
+		}
+
+		@keyframes rotate {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		.info.country div {
+			margin-right: 10px;
+			writing-mode: horizontal-tb;
+			font-size: 22px;
+			font-family: "Sawarabi Mincho", serif;
+			font-weight: lighter;
+		}
+
+		.motto {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-family: "Sawarabi Mincho", serif;
+			width: fit-content;
+			pointer-events: none;
+			opacity: 0;
+			color: white;
+		}
+
+		.motto p {
+			margin: 0;
+			z-index: 999;
+		}
+
+		.motto>img {
+			max-width: 300px;
+			filter: brightness(0.4);
+		}
+
+		.motto p:first-child {
+			font-size: 1.7em;
+		}
+
+		.motto p:last-child {
+			margin-top: 5px;
+			text-align: right;
+			font-size: 1.3em;
+		}
+
+		@keyframes motto-appear {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes motto-disappear {
+			from {
+				opacity: 1;
+			}
+
+			to {
+				opacity: 0;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="content">
+		<div class="chara">
+			<img src="raiden_png.png" alt="" />
+		</div>
+		<div class="container">
+			<div class="title">
+				雷電 <br />
+				将軍
+			</div>
+			<div class="info">
+				<button onclick="window.open('https://www.bilibili.com/video/BV1kb4y1m7e7')">
+					Learn More
+				</button>
+				<div class="info country">
+					<div>稲妻 Inazuma</div>
+					<img src="Hidari_mitsudomoe.svg" alt="" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="motto" id="country-logo">
+		<img src="inazuma.webp" alt="" />
+	</div>
+	<div class="motto" id="motto-text">
+		<p>
+			「寝るが内に　見るをのみやは　夢と言わむ　はかなき世をも　うつつとは見ず」
+		</p>
+		<p>――　古今和歌集　835番</p>
+	</div>
+</body>
+
+</html>
