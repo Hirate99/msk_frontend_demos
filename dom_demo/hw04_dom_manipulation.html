@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Find Red!</title>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            let divList = []
+            let directionList = []
+            let speedList = []
+
+            let getId = (i) => {
+                return `circle-${i}`
+            }
+
+            let num = Math.max(Math.floor(Math.random() * 20), 10)
+            for (let i = 0; i < num; i++) {
+                let id = getId(i)
+                divList.push($(`<div class="circle" id="${id}"></div>`))
+                directionList.push(Math.random() * 360)
+                speedList.push(Math.random() * 6 + 2)
+            }
+
+            $(".container").append(...divList)
+
+            for (let i = 0; i < num; i++) {
+
+                let id = getId(i)
+
+                let color = (i === num - 1) ? "red" : 
+                    `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
+
+                let size = Math.max(Math.random() * 100, 40)
+                let left = Math.max(Math.random() * window.innerWidth - size, 0)
+                let top = Math.max(Math.random() * window.innerHeight - size, 0)
+
+                $(`#${id}`).css({
+                    left: `${left}px`,
+                    top: `${top}px`,
+                    width: `${size}px`,
+                    height: `${size}px`,
+                    "border-radius": `${size / 2}px`,
+                    "box-size": "border-box",
+                    "background-color": color,
+                })
+            }
+
+            $(".circle").click(function () {
+                if ($(this).css("background-color") === "rgb(255, 0, 0)") {
+                    $(".title").text("GREAT ENEMY FELLED")
+                    $(".title").css({
+                        color: "#8B0000",
+                        transform: "scale(0.8, 1.2) translate(-50%)",
+                        "font-size": "xx-large",
+                        "transform-origin": "left center",
+                    })
+                    $(this).css({
+                        "background-color": "gold",
+                        "transform": "scale(1.7, 1.7)",
+                        "transition-duration": "0.5s",
+                    })
+                    for (let i = 0; i < num; i++) {
+                        let id = getId(i)
+                        if (id != $(this).attr("id")) {
+                            $(`#${id}`).css({
+                                "background-color": "transparent",
+                                "transform": "scale(0.8, 0.8)",
+                                "transition-duration": "2s ease-in-out",
+                            })
+                        }
+                    }
+                    setTimeout(() => {
+                        window.alert("You Win!")
+                        location.reload()
+                    }, 500)
+                } else {
+                    window.alert("no")
+                }
+            })
+
+            let checkIsValid = (i, left, top) => {
+                let id = getId(i)
+                let divSize = parseInt($(`#${id}`).css("width"))
+                if (
+                    left >= 0 &&
+                    left + divSize <= window.innerWidth &&
+                    top >= 0 &&
+                    top + divSize <= window.innerHeight
+                ) {
+                    return true
+                }
+                return false
+            }
+
+            let calNextPos = (i) => {
+                let id = getId(i)
+                let deg = directionList[i]
+                let deltaX = Math.cos((deg * Math.PI) / 180) * speedList[i]
+                let deltaY = Math.sin((deg * Math.PI) / 180) * speedList[i]
+                let left = parseInt($(`#${id}`).css("left")) + deltaX
+                let top = parseInt($(`#${id}`).css("top")) + deltaY
+                return [left, top]
+            }
+
+            let fetchNextStep = (i) => {
+                let [left, top] = calNextPos(i)
+                let id = getId(i)
+                if (checkIsValid(i, left, top)) {
+                    $(`#${id}`).css({
+                        left: left,
+                        top: top,
+                    })
+                    return
+                } else {
+                    directionList[i] = Math.random() * 360
+                    fetchNextStep(i)
+                }
+            }
+
+            setInterval(() => {
+                divList.map((div, i) => {
+                    fetchNextStep(i)
+                    return div
+                })
+            }, 1000 / 24)
+        })
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            margin: 0;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .circle {
+            box-sizing: border-box;
+            position: absolute;
+        }
+
+        .circle:hover {
+            cursor: pointer;
+        }
+
+        .title {
+            position: absolute;
+            top: 2em;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: x-large;
+            font-weight: bolder;
+            font-family: "Times New Roman", Times, serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <div class="title">找到红球吧</div>
+</body>
+
+</html>
