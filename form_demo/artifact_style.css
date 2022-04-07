@@ -1,0 +1,493 @@
+@font-face {
+    font-family: 'Genshin';
+    src: url('genshin.ttf') format('truetype');
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Genshin', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(37,41,74);
+    min-width: 800px;
+}
+
+button {
+    border: 0px;
+    background-color: transparent;
+    font-family: 'Genshin', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header {
+    height: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+
+.header > button {
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    color: white;
+    border-radius: 2px;
+    transition: 0.2s;
+    height: 100%;
+}
+
+.header > button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: 0.2s;
+    text-decoration: underline;
+}
+
+.header > .title {
+    margin-right: 2rem;
+}
+
+.header-container {
+    position: relative;
+    height: 4rem;
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(to top, rgb(37,41,74), rgb(37,41,74) 85%, rgb(26, 29, 54) 100%);
+}
+
+.content-container {
+    position: relative;
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cover {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 3px white solid;
+
+    color: white;
+    font-size: 1.5rem;
+
+    margin-bottom: 1rem;
+}
+
+.cover:hover {
+    cursor: pointer;
+}
+
+.cover::before {
+    position: absolute;
+    content: '';
+    
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('raiden_background.jpg');
+    background-position: 50% 40%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 0.s;
+}
+
+.cover::after {
+    position: absolute;
+    content: 'Ah, farming, farming never ends...';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: transparent;
+    transition: 0.2s;
+    width: 100%;
+    text-align: center;
+}
+
+.cover:hover::after {
+    color: white;
+    transition: 0.2s;
+}
+
+.cover:hover::before {
+    transform: scale(1.1);
+    filter: blur(5px);
+    transition: 0.4s;
+}
+
+.header {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header > div {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.content {
+    width: 80%;
+    display: flex;
+
+}
+
+.column-left {
+    width: 35%;
+}
+
+.column-right {
+    width: 65%;
+    padding-left: 5rem;
+}
+
+.chara > div:first-child {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.chara > div:last-child {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.paging {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+}
+
+.paging > div {
+    font-size: 0.7rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    border-radius: 999px;
+    border: 1px solid white;
+    box-sizing: border-box;
+    text-align: center;
+
+    transition: 0.1s;
+}
+
+.paging > div:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}
+
+.paging > div:first-child {
+    margin-left: auto;
+}
+
+#chara > div:first-child {
+    font-size: 1.4rem;
+    text-decoration: underline;
+}
+
+#chara > div:last-child {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    font-family: 'Genshin';
+}
+
+.artifacts-imgs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.artifacts-imgs > div {
+    height: 4rem;
+    width: 4rem;
+}
+
+.artifacts-imgs > div > img {
+    width: 100%;
+    height: 100%;
+}
+
+.artifacts-imgs > div:hover {
+    cursor: pointer;
+}
+
+.arti {
+    margin-bottom: 1.5rem;
+}
+
+
+footer {
+    color: white;
+    font-family: 'Genshin';
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.form-title {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.charater-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3rem;
+}
+
+.charater-select > img {
+    height: 95%;
+    transition: 0.2s;
+}
+
+.charater-select > img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+.character-show {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.character-show > div {
+    height: 5rem;
+    width: 5rem;
+    margin-top: 1rem;
+    margin-right: 1.5rem;
+    margin-bottom: 1   rem;
+    box-sizing: border-box;
+    border-radius: 2.5rem;
+    overflow: hidden;
+}
+
+.character-show > div > img {
+    height: 100%;
+    opacity: 0.5;
+}
+
+.character-show > div.selected {
+    border: 3px white solid;
+}
+
+.character-show > div.selected > img {
+    height: 100%;
+    opacity: 1;
+}
+
+.character-show > div > img:hover {
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.character-show > div.selected > img:hover {
+    cursor: pointer;
+    opacity: 1.0;
+    transition: 0.2s;
+}
+
+.my-form-field {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    padding-right: 0.5rem;
+    box-sizing: border-box;
+}
+
+.my-form-field > div:first-child {
+    margin-bottom: 0.5rem;
+}
+
+.my-form-field > input {
+    height: 1rem;
+    border-radius: 5px;
+    border: 2px white solid;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    font-family: 'Genshin';
+    background-color: transparent;
+    color: white;
+}
+
+.section-title {
+    color: white;
+    font-size: 1.2rem;
+    background-color: rgb(37,41,74);
+    transform: translate(10%, 50%);
+    text-align: center;
+    width: fit-content;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+}
+
+#form-head > div {
+    margin-top: 0.5rem;
+    width: 50%;
+}
+
+.container-lr {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px white solid;
+    flex-wrap: wrap;
+}
+
+.main-stat {
+    margin-top: 0.5rem;
+}
+
+.main-stat-title {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.container-lr > .main-stat {
+    width: 33%;
+}
+
+select {
+    border-radius: 5px;
+    border: 2px white solid;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    font-family: 'Genshin';
+    background-color: transparent;
+    color: white;
+}
+
+option {
+    background-color: rgb(37,41,74);
+    font-size: 1rem;
+    border-radius: 1rem;
+    font-family: 'Genshin';
+}
+
+.sub-stat {
+    margin-top: 0.5rem;
+}
+
+.sub-stats div {
+    width: 25%;
+    margin-top: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sub-stats.container-lr  {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+}
+
+.my-form-field.sub-stats > div:first-child {
+    width: 100%;
+    margin-top: 0;
+}
+
+button.submit {
+    color: white;
+    padding: 0.4rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 999px;
+    transition: 0.1s;
+}
+
+button.submit:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.res {
+    margin-top: 1.5rem;
+    min-width: 130px;
+}
+
+.res-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.result-item-stat {
+    margin-top: 0.5rem;
+}
+
+.result-item-stat > div:first-child {
+    font-size: 0.85rem;
+}
+
+.result {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+
+    transition: 0.1s;
+}
+
+.result:hover {
+    color: black;
+    cursor: pointer;
+    background-color: white;
+    transition: 0.2s;
+}
+
+.result-item-title {
+    font-size: 1.1rem;
+}
+
+footer {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+footer > div {
+    width: 80%;
+    text-align: left;
+}
