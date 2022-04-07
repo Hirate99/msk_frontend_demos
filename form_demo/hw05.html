@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<!--A Genshin Impact artifact stats calculator which actully doesn't calculate anyting-->
+<!--Formatted by prettier-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Artifacts Calculator</title>
+		<link rel="stylesheet" type="text/css" href="artifact_style.css" />
+
+		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+		<script>
+			const isNumber = (number) => {
+				const reg = /^[0-9]+.?[0-9]*/
+				return reg.test(number)
+			}
+
+			const invalidStyle = (id) => {
+				$(`#${id}`).css({
+					"border-color": "red",
+					"border-width": "2px",
+					"border-style": "solid",
+					transition: "0.15s",
+				})
+			}
+
+			const validStyle = (id) => {
+				$(`#${id}`).css({
+					"border-color": "white",
+					"border-width": "2px",
+					"border-style": "solid",
+					transition: "0.15s",
+				})
+			}
+
+			jQuery(document).on(
+				"change",
+				[
+					"#weapon-atk",
+					"#sub-hp",
+					"#sub-atk",
+					"#sub-def",
+					"#sub-ele-mastery",
+					"#sub-crit-rate",
+					"#sub-crit-dmg",
+					"#sub-charge-rate",
+				],
+				function (e) {
+					validStyle(e.target.id)
+				}
+			)
+
+			const onFormSubmit = () => {
+				const form = document.forms.artifacts
+				const weaponAtk = form.weaponAtk.value
+				const subHp = form.subHp.value
+				const subAtk = form.subAtk.value
+				const subDef = form.subDef.value
+				const subEleMastery = form.subEleMastery.value
+				const subCritRate = form.subCritRate.value
+				const subCritDmg = form.subCritDmg.value
+				const subChargeRate = form.subChargeRate.value
+
+				if (!isNumber(weaponAtk) || weaponAtk < 0) {
+					invalidStyle("weapon-atk")
+				}
+
+				if (!isNumber(subHp) || subHp < 0) {
+					invalidStyle("sub-hp")
+				}
+
+				if (!isNumber(subAtk) || subAtk < 0) {
+					invalidStyle("sub-atk")
+				}
+
+				if (!isNumber(subDef) || subDef < 0) {
+					invalidStyle("sub-def")
+				}
+
+				if (!isNumber(subEleMastery) || subEleMastery < 0) {
+					invalidStyle("sub-ele-mastery")
+				}
+
+				if (!isNumber(subCritRate) || subCritRate < 0) {
+					invalidStyle("sub-crit-rate")
+				}
+
+				if (!isNumber(subCritDmg) || subCritDmg < 0) {
+					invalidStyle("sub-crit-dmg")
+				}
+
+				if (!isNumber(subChargeRate) || subChargeRate < 0) {
+					invalidStyle("sub-charge-rate")
+				}
+
+				// prevent refresh anyway
+				return false
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header-container">
+				<div class="header">
+					<div class="title">GILab</div>
+					<button>Artifacts Calculator</button>
+				</div>
+			</div>
+			<div class="content-container">
+				<div class="content">
+					<div class="column-left">
+						<div class="cover"></div>
+						<div class="chara" id="chara">
+							<div>Raiden Shougun</div>
+							<div>Emblem of Servered Fate</div>
+						</div>
+						<div class="artifacts-imgs">
+							<div>
+								<img
+									src="artifacts/emblem_of_severed_fate_flower.png"
+									alt=""
+								/>
+							</div>
+							<div>
+								<img
+									src="artifacts/emblem_of_severed_fate_plume.png"
+									alt=""
+								/>
+							</div>
+							<div>
+								<img
+									src="artifacts/emblem_of_severed_fate_sands.png"
+									alt=""
+								/>
+							</div>
+							<div>
+								<img
+									src="artifacts/emblem_of_severed_fate_goblet.png"
+									alt=""
+								/>
+							</div>
+							<div>
+								<img
+									src="artifacts/emblem_of_severed_fate_circlet.png"
+									alt=""
+								/>
+							</div>
+						</div>
+						<div class="chara arti">
+							<div>2-Piece Bonus</div>
+							<div>Energy Recharge +20%.</div>
+						</div>
+						<div class="chara arti">
+							<div>4-Piece Bonus</div>
+							<div>
+								Increases Elemental Burst DMG by 25% of Energy
+								Recharge. A maximum of 75% bonus DMG can be
+								obtained in this way.
+							</div>
+						</div>
+						<div class="paging">
+							<div>1</div>
+						</div>
+					</div>
+					<div class="column-right">
+						<div class="charater-select">
+							<div class="form-title">Charaters</div>
+							<img src="elements/electro.png" alt="" />
+						</div>
+						<div class="character-show">
+							<div>
+								<img src="characters/keqing.png" alt="" />
+							</div>
+							<div>
+								<img src="characters/kujou_sara.png" alt="" />
+							</div>
+							<div class="selected">
+								<img
+									src="characters/raiden_shogun.png"
+									alt=""
+								/>
+							</div>
+							<div>
+								<img src="characters/yae_miko.png" alt="" />
+							</div>
+						</div>
+						<div class="charater-select">
+							<div class="form-title">Results</div>
+						</div>
+						<div class="res-container">
+							<div class="result">
+								<div class="result-item">
+									<div class="result-item-title">Hu Tao</div>
+									<div class="result-item-stat">
+										<div>Avaliable Stats</div>
+										<div>33.1</div>
+									</div>
+									<div class="result-item-stat">
+										<div>Crit Score</div>
+										<div>200.3</div>
+									</div>
+								</div>
+							</div>
+							<div class="result">
+								<div class="result-item">
+									<div class="result-item-title">Yomiya</div>
+									<div class="result-item-stat">
+										<div>Avaliable Stats</div>
+										<div>27.1</div>
+									</div>
+									<div class="result-item-stat">
+										<div>Crit Score</div>
+										<div>189.4</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="charater-select">
+							<div class="form-title">Statictics</div>
+						</div>
+						<form
+							method="post"
+							name="artifacts"
+							id="artifacts"
+							onsubmit="return onFormSubmit()"
+						>
+							<div class="section-title">Character Stats</div>
+							<div class="container-lr" id="form-head">
+								<div>
+									<div class="my-form-field">
+										<div>Level</div>
+										<input
+											type="number"
+											id="chara-level"
+											name="level"
+											value="90"
+											min="1"
+											max="90"
+											form="artifacts"
+										/>
+									</div>
+								</div>
+								<div>
+									<div class="my-form-field">
+										<div>Weapon Atk</div>
+										<input
+											type="text"
+											id="weapon-atk"
+											form="artifacts"
+											name="weaponAtk"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="main-stat">
+								<div class="section-title">
+									Artifacts Main Stats
+								</div>
+								<div class="container-lr">
+									<div class="main-stat">
+										<div class="my-form-field">
+											<div>Sand</div>
+											<select
+												id="sand-stat"
+												name="sand"
+												form="artifacts"
+											>
+												<option selected value="ATK%">
+													ATK%
+												</option>
+												<option value="HP%">HP%</option>
+												<option value="DEF%">
+													DEF%
+												</option>
+												<option value="ElementCharge">
+													Element Charge
+												</option>
+												<option
+													value="ElementalMastery"
+												>
+													Elemental Mastery
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="main-stat">
+										<div class="my-form-field">
+											<div>Goblet</div>
+											<select
+												id="goblet-stat"
+												name="goblet"
+												form="artifacts"
+											>
+												<option selected value="ATK%">
+													ATK%
+												</option>
+												<option value="HP%">HP%</option>
+												<option value="DEF%">
+													DEF%
+												</option>
+												<option value="ElementDamage">
+													Element Damage
+												</option>
+												<option
+													value="ElementalMastery"
+												>
+													Elemental Mastery
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="main-stat">
+										<div class="my-form-field">
+											<div>Circlet</div>
+											<select
+												id="circlet-stat"
+												name="circlet"
+												form="artifacts"
+											>
+												<option selected value="ATK%">
+													ATK%
+												</option>
+												<option value="HP%">HP%</option>
+												<option value="DEF%">
+													DEF%
+												</option>
+												<option value="CritRate">
+													Crit Rate
+												</option>
+												<option value="CritDamage">
+													Crit Damage
+												</option>
+												<option
+													value="ElementalMastery"
+												>
+													Elemental Mastery
+												</option>
+												<option value="Heal">
+													Heal
+												</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sub-stat">
+								<div class="section-title">
+									Artifacts Detailed Stats
+								</div>
+								<div class="container-lr sub-stats">
+									<div class="my-form-field sub-stats">
+										<div>HP</div>
+										<input
+											type="text"
+											id="sub-hp"
+											form="artifacts"
+											name="subHp"
+										/>
+									</div>
+									<div class="my-form-field sub-stats">
+										<div>Atk</div>
+										<input
+											type="text"
+											id="sub-atk"
+											form="artifacts"
+											name="subAtk"
+										/>
+									</div>
+									<div class="my-form-field sub-stats">
+										<div>Def</div>
+										<input
+											type="text"
+											id="sub-def"
+											form="artifacts"
+											name="subDef"
+										/>
+									</div>
+									<div class="my-form-field sub-stats">
+										<div>Elemental Mastery</div>
+										<input
+											type="text"
+											id="sub-ele-mastery"
+											form="artifacts"
+											name="subEleMastery"
+										/>
+									</div>
+									<div class="my-form-field sub-stats">
+										<div>Crit Rate %</div>
+										<input
+											type="text"
+											id="sub-crit-rate"
+											form="artifacts"
+											name="subCritRate"
+										/>
+									</div>
+									<div class="my-form-field sub-stats">
+										<div>Crit Damage %</div>
+										<input
+											type="text"
+											id="sub-crit-dmg"
+											form="artifacts"
+											name="subCritDmg"
+										/>
+									</div>
+									<div class="my-form-field sub-stats">
+										<div>Element Charge %</div>
+										<input
+											type="text"
+											id="sub-charge-rate"
+											form="artifacts"
+											name="subChargeRate"
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="res">
+								<button class="submit" type="submit">
+									Submit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div>By MSKYurina</div>
+		</footer>
+	</body>
+</html>
