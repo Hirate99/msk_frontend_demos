@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--Formatted by prettier-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Rock!</title>
+		<link rel="stylesheet" type="text/css" href="css3_demo.css" />
+		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script>
+			const Rock = "🤜"
+			const Paper = "🖐️"
+			const Scissors = "✌️"
+
+			const RockPaperScissors = [Rock, Scissors, Paper]
+			const IDs = ["gaming-rock", "gaming-scissors", "gaming-paper"]
+
+			$(document).ready(function () {
+				$("#gaming-rock").html(Rock)
+				$("#gaming-paper").html(Paper)
+				$("#gaming-scissors").html(Scissors)
+			})
+
+			const showWinMsg = (winner) => {
+				const winnerMsg = `${winner} won!`
+
+				$("#game-result").show()
+				$("#winning-title").html(winnerMsg)
+				$("#game-result").css({
+					display: "relative",
+				})
+
+				$("#game-result").click(function (e) {
+					location.reload()
+				})
+
+				$("#winning").click(function (e) {
+					e.stopPropagation()
+				})
+
+				$("#close-btn").click(function (e) {
+					location.reload()
+				})
+			}
+
+			$(() => {
+				let preSelected = ""
+
+				$("div[id^='gaming']").click(function (e) {
+					const player = e.target.id
+					const playerID = IDs.findIndex((id) => id === player)
+
+					const computerID = Math.floor(
+						Math.random() * RockPaperScissors.length
+					)
+					const computer = RockPaperScissors[computerID]
+					$("#computer").html(computer)
+
+					$(this).addClass("border-anime")
+
+					if (preSelected !== "") {
+						$(`#${preSelected}`).removeClass("border-anime")
+					}
+
+					if (playerID === computerID) {
+						// draw
+					} else if ((playerID + 1) % 3 === computerID) {
+						const playerScore =
+							parseInt($("#user-result").html()) + 1
+						$("#user-result").html(playerScore)
+						if (playerScore === 3) {
+							console.log("user win")
+							showWinMsg("You")
+						}
+					} else {
+						const computerScore =
+							parseInt($("#computer-result").html()) + 1
+						$("#computer-result").html(computerScore)
+						if (computerScore === 3) {
+							showWinMsg("Computer")
+						}
+					}
+
+					preSelected = player
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="container col-flex">
+			<div class="fixed overlay full noselect" id="game-result">
+				<div class="fixed fixed-center default-font" id="winning">
+					<div class="row-flex flex-center" id="winning-title">
+						You Won!
+					</div>
+					<div class="row-flex flex-center -button" id="close-btn">
+						Close
+					</div>
+				</div>
+			</div>
+
+			<div
+				class="row-flex flex-center default-font"
+				id="computer-container"
+			>
+				<div
+					class="computer row-flex flex-center noselect"
+					id="computer"
+				>
+					?
+				</div>
+			</div>
+			<div class="row-flex flex-center default-font" id="title">
+				剪刀、石头、布
+			</div>
+			<div class="row-flex flex-center flex-around" id="player">
+				<div class="col-flex icon-container flex-center">
+					<div
+						class="icon row-flex flex-center noselect"
+						id="gaming-scissors"
+					></div>
+					<div class="name default-font">剪刀</div>
+				</div>
+				<div class="col-flex icon-container flex-center">
+					<div
+						class="icon row-flex flex-center noselect"
+						id="gaming-rock"
+					></div>
+					<div class="name default-font">石头</div>
+				</div>
+				<div class="col-flex icon-container flex-center">
+					<div
+						class="icon row-flex flex-center noselect"
+						id="gaming-paper"
+					></div>
+					<div class="name default-font">布</div>
+				</div>
+			</div>
+			<div class="col-flex flex-center default-font" id="result-cotainer">
+				<div class="title">Scoreboard</div>
+				<div class="row-flex flex-around result">
+					<div class="col-flex flex-center result-item">
+						<div>YOU</div>
+						<div id="user-result">0</div>
+					</div>
+					<div class="default-font row-flex flex-center">:</div>
+					<div class="col-flex flex-center result-item">
+						<div>AI</div>
+						<div id="computer-result">0</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
