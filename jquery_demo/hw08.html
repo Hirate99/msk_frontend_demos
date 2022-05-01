@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TsingHua</title>
+    <link rel="stylesheet" type="text/css" href="hw08.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+        integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous">
+        </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="fixed overlay full" id="overlay">
+        <div class="fixed fixed-center hoverable" id="guidence">
+            Guide
+        </div>
+        <div class="fixed fixed-bottom-center hoverable">
+            <div class="row-flex flex-center" id="close">
+                Close
+            </div>
+
+        </div>
+    </div>
+
+    <div class="fixed-top nav">
+        <div class="row-flex default-font" id="header-area">
+            <div class="col-flex" id="header-container">
+                <div class="row-flex" id="top-header-container">
+                    <div class="flex-center small-item-margin light-header-item hoverable">
+                        访客
+                    </div>
+                    <div class="flex-center small-item-margin light-header-item hoverable">
+                        校友
+                    </div>
+                    <div class="flex-center search small-item-margin light-header-item hoverable" id="search">
+                        搜索
+                    </div>
+                    <input class="search-bar" id="search-bar" />
+                </div>
+                <div class="row-flex" id="below-header-container">
+                    <div class="row-flex header">
+                        <div class="flex-center header-title">
+                            TsingHua Univ.
+                        </div>
+                        <div class="flex-center header-item default-item-margin hoverable" id="news">
+                            清华新闻
+                        </div>
+                        <div class="flex-center header-item header-collapse default-item-margin hoverable"
+                            id="schoolIntro">
+                            学校概况
+                            <div class="collapse-panel default">
+                                <div class="hoverable">
+                                    校庆致辞
+                                </div>
+                                <div class="hoverable">
+                                    学校沿革
+                                </div>
+                                <div class="hoverable">
+                                    历任领导
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-center header-item header-collapse default-item-margin hoverable"
+                            id="researchIntro">
+                            科学研究
+                            <div class="collapse-panel default">
+                                <div class="hoverable">
+                                    科研项目
+                                </div>
+                                <div class="hoverable">
+                                    科研机构
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-flex flex-center hoverable" id="guide-container">
+                Guide
+            </div>
+        </div>
+    </div>
+    <div class="swiper img">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide slides hoverable">
+                <div id="slide1"></div>
+            </div>
+            <div class="swiper-slide slides hoverable">
+                <div id="slide2"></div>
+            </div>
+            <div class="swiper-slide slides hoverable">
+                <div id="slide3"></div>
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+
+        const collapsePos = () => {
+            $('.collapse-panel.default').each((index, elem) => {
+                $(elem).css({
+                    'left': $(elem).parent().position().left - ($(elem).width() - $(elem).parent().width()) / 4 + 'px',
+                    'display': 'none',
+                })
+            })
+        }
+
+        $(() => {
+
+            collapsePos()
+
+            $(window).on('resize', () => {
+                console.log('resize')
+                collapsePos()
+            })
+
+            $('#search-bar').hide()
+            $('#overlay').hide()
+
+            $('.header-collapse').hover(
+                function () {
+                    $('.collapse-panel.default').hide()
+                    $(this).children('.collapse-panel.default').show()
+                },
+                () => {
+                    $('.collapse-panel.default').hide()
+                }
+            )
+
+            let searchHovered = false
+
+            $('#search').hover(
+                () => {
+                    if (!searchHovered) {
+                        searchHovered = true
+                        $('#search-bar').toggle('slide', { direction: 'right' }, 300)
+                    }
+                },
+            )
+
+            $('#search-bar').hover(
+                () => {
+                    console.log('hovered')
+                },
+                () => {
+                    if (searchHovered) {
+                        searchHovered = false
+                        $('#search-bar').hide('slide', { direction: 'right' }, 300)
+                    }
+                }
+            )
+
+
+            $('#guide-container').click(() => {
+                $('#overlay').show('fade')
+            })
+
+            $('#close').click(() => {
+                $('#overlay').hide('fade')
+            })
+        })
+    </script>
+</body>
+
+</html>
